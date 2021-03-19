@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <p style="color: aliceblue; font-size: 1.7em;">ART - SIKE</p>
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+    #thegrid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 10px;
+        grid-template-rows: auto 200px auto;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .one {
+        grid-column: 1;
+        grid-row: 2;
+        text-align: center;
+    }
+
+    .two {
+        grid-column: 2;
+        grid-row: 2;
+        text-align: center;
+        }
+    .three {
+        grid-column: 3;
+        grid-row: 2;
+        text-align: center;
+        }
+
+    #github_button{
+        background-color: cadetblue;
+        background-repeat:no-repeat;
+        border: none;
+        outline:none;
+        border-radius: 50%;
+        width: 200px;
+        height:200px;
+        max-width: 100%;
+        max-height: 100%;
+        /* padding: 4px; */
+        /* object-fit: cover;
+        width: 100%;
+        max-height: 100%; */
+    }
+
+    #unige_button{
+        background-color: beige;
+        background-repeat:no-repeat;
+        border: none;
+        outline:none;
+        width: 200px;
+        height:200px;
+        border-radius: 50%;
+    }
+
+    #info_button{
+        background-color: rgb(61, 100, 43);
+        background-repeat:no-repeat;
+        border: none;
+        outline:none;
+        width: 200px;
+        height:200px;
+        border-radius: 50%;
+    }
+
+    #imag{
+        /* width: 50px; */
+        max-width:100%;
+        max-height:100%;
+        border-radius: 50%;
+    }
+
+    p{
+        font-size: 40;
+        font-weight: bold;
+    }
+
+    .paper {
+        color: beige;
+    }
+
+    .github {
+        color: cadetblue;
+    }
+
+    .info {
+        color: rgb(61, 100, 43);
+    }
+
+</style>
+
+    <div id="thegrid">
+        <div class="one">
+            <a href="https://github.com/QuentinRiv/">
+            <button class="collapsible" id="github_button">
+                <img id="imag" src="/static//imag/github.PNG" alt="">
+            </button>
+            </a>
+            <p class="github">Repository</p>
+        </div>
+        <div class="two">
+            <a href="http://127.0.0.1:8080/paper"><button class="collapsible" id="unige_button">
+                <img id="imag" src="/static//imag/paper.png" alt="">
+            </button>
+            </a>
+            <p class="paper">Master Thesis</p>
+        </div>
+        <div class="three">
+            <a href="http://127.0.0.1:8080/info"><button class="collapsible" id="info_button">
+                    <img id="imag" src="/static//imag/info.png" alt="">
+                </button>
+            </a>
+            <p class="info">Information</p>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

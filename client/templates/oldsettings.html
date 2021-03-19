@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/javascript">
+    function updateSK() {
+        var data = {user : "{{current_user.name}}",
+                    type : "update_key",
+                    secretK : parseInt($("#secretK").val())}
+        fetch('/update_key', {
+            method: "POST",
+            credentials: "include",
+            xhrFields: { withCredentials: true },
+            body: JSON.stringify(data),
+            cache: "no-cache",
+            headers: new Headers({
+                "content-type": "application/json"
+            })
+        });
+    }
+
+    function addMember() {
+            var data = {
+                user: "{{current_user.name}}",
+                type: "add_member",
+                newmember: "Eve",
+                groupname : 'First'
+            }
+            fetch('/add_member', {
+                method: "POST",
+                credentials: "include",
+                xhrFields: { withCredentials: true },
+                body: JSON.stringify(data),
+                cache: "no-cache",
+                headers: new Headers({
+                    "content-type": "application/json"
+                })
+            });
+        }
+
+    function removeMember() {
+            var data = {
+                user: "{{current_user.name}}",
+                type: "remove_member",
+                member: "Charlie",
+                groupname: 'First'
+            }
+            fetch('/remove_member', {
+                method: "POST",
+                credentials: "include",
+                xhrFields: { withCredentials: true },
+                body: JSON.stringify(data),
+                cache: "no-cache",
+                headers: new Headers({
+                    "content-type": "application/json"
+                })
+            });
+        }
+</script>
+
+<div class="rightbox">
+    <div class="profile tabShow">
+        <h1>{{current_user.name}}</h1>
+        <h2>Private key :</h2>
+        <input type="text" class="input" id="secretK" value="secretK">
+        <button onClick="updateSK()">Envoyer</button>
+    </div>
+</div>
+
+<br>
+<br>
+<button onClick="addMember()">Rajouter</button>
+
+
+<br>
+<br>
+<button onClick="removeMember()">Supprimer</button>
+
+{% endblock %}

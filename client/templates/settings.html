@@ -1,0 +1,331 @@
+{% extends "base.html" %}
+
+{% block title %}
+<p style="color: aliceblue; font-size: 1.7em;">Settings</p>
+{% endblock %}
+
+{% block content %}
+
+
+    <style class="cp-pen-styles">
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #27ae60;
+            font-family: "proxima-nova", "Source Sans Pro", sans-serif;
+            font-size: 1em;
+            letter-spacing: 0.1px;
+            color: #32465a;
+            text-rendering: optimizeLegibility;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+            -webkit-font-smoothing: antialiased;
+        }
+    
+        #frame {
+            width: 95%;
+            min-width: 360px;
+            max-width: 1000px;
+            height: 92vh;
+            min-height: 300px;
+            max-height: 720px;
+            background: #E6EAEA;
+            background: #2c3e50;
+        }
+
+         #head {
+            width: 100%;
+            height: 10%;
+            line-height: 60px;
+            background: #4d290d;
+            text-align: center;
+            }
+        
+        #below {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+            grid-template-rows: repeat(3, 1fr);
+            width: 100%;
+            height: 90%;
+        }
+
+        .one {
+            grid-column: 1;
+            grid-row: 2;
+            text-align: center;
+            }
+        .two {
+            grid-column: 2;
+            grid-row: 2;
+            text-align: center;
+            }
+        .three {
+            grid-column: 3;
+            grid-row: 2;
+            text-align: center;
+            }
+
+        .four {
+            grid-column: 2;
+            grid-row: 3;
+            text-align: center;
+            }
+
+        .five {
+            grid-column: 1 / 4;
+            grid-row: 3;
+            text-align: center;
+            /* z-index: 2; */
+            }
+
+        .six {
+            grid-column: 1 / 4;
+            grid-row: 3;
+            text-align: center;
+            /* z-index: 1; */
+            }
+
+
+        .myicon {
+            color: black;
+            }
+
+        .collapsible {
+            background-color: #777;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            border-radius: 5px;
+        }
+
+        .active, .collapsible:hover {
+            background-color: #555;
+        }
+
+        .content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            /* background-color: #f1f1f1; */
+        }
+
+        input[type=text], select {
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            }
+
+        #updateKey {
+            background-color: #889702;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            }
+
+        .deleteImg{
+            width: 150;
+            height: 150;
+            padding: 3px 3px;
+        }
+
+        .joliImg{
+            border-radius:10%
+        }
+
+        .buttonToDel{
+            background-color: Transparent;
+            background-repeat:no-repeat;
+            border: none;
+            outline:none;
+        }
+
+        .buttonToAdd{
+            background-color: Transparent;
+            background-repeat:no-repeat;
+            border: none;
+            outline:none;
+        }
+
+        </style>
+
+
+
+
+            <div class="one">
+                <button class="collapsible" id="collpapse_toadd">
+                    <i class="fas fa-user-plus myicon fa-4x"></i>
+                </button>
+            </div>
+            <div class="two">
+                <button class="collapsible" id="collpapse_key">
+                    <i id="icon1" class="fa fa-key fa-4x myicon"></i>
+                </button>
+            </div>
+            <div class="three">
+                <button class="collapsible" id="collpapse_todelete">
+                    <i class="fas fa-user-slash fa-4x myicon"></i>
+                </button>
+            </div>
+
+            <div class="four">
+                <div id="key" class="content">
+                    <input type="text" class="input" id="secretK" placeholder="New key">
+                    <br>
+                    <br>
+                    <button id="updateKey" onClick="updateSK()">Send</button>
+                </div>
+            </div>
+
+            <!-- <div class="five"> -->
+                <div  id="todelete" class="content five">
+                    {%for name in members%}
+                    <button onClick="removeMember('{{name}}')" class=buttonToDel>
+                        <img id={{name}} class="avatar deleteImg joliImg" src="/static//imag/{{membersid[name]}}.PNG" alt="">
+                    </button>
+                    {%endfor%}
+                <!-- </div> -->
+            </div>
+            <!-- <div class="six"> -->
+                <div id="toadd" class="content six">
+                    {%for name in notmembers%}
+                    <button onClick="addMember('{{name}}')" class=buttonToAdd>
+                        <img id={{name}} class="avatar deleteImg joliImg" src="/static//imag/{{notmembersid[name]}}.PNG" alt="">
+                    </button>
+                    {%endfor%}
+                <!-- </div> -->
+            </div>
+
+
+    <script>
+        console.log('{{membersid}}');
+
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            var idName = coll[i].id;
+            console.log(idName)
+
+            coll[i].addEventListener("click", function () {
+                var id = idName.slice(10);
+                console.log("Nom de l'id : " + id)
+                this.classList.toggle("active");
+                var content = document.getElementsByClassName("content");
+                for (let j = 0; j < content.length; j++) {
+                    var elem = content[j];
+                    console.log("Element :" + elem.id);
+                    console.log("id" + this.id.slice(10));
+                    console.log(content[j].style.maxHeight)
+                    if (content[j].style.maxHeight == "" && this.id.slice(10) == elem.id) {
+                        content[j].style.maxHeight = content[j].scrollHeight + "px";
+                        content[j].style.zIndex = 2;
+                        console.log(content[j])
+                    } else {
+                        content[j].style.zIndex = 1;
+                        content[j].style.maxHeight = null;
+                    }
+
+                }
+            });
+        }
+
+        function updateSK() {
+            var data = {
+                user: "{{current_user.name}}",
+                type: "update_key",
+                groupname: "{{partner}}",
+                secretK: parseInt($("#secretK").val())
+            }
+            fetch('/update_key', {
+                method: "POST",
+                credentials: "include",
+                xhrFields: { withCredentials: true },
+                body: JSON.stringify(data),
+                cache: "no-cache",
+                headers: new Headers({
+                    "content-type": "application/json"
+                })
+            });
+        }
+
+
+        function removeMember(userToDel) {
+            var data = {
+                user: "{{current_user.name}}",
+                type: "remove_member",
+                member: userToDel,
+                groupname: "{{partner}}"
+            }
+            fetch('/remove_member', {
+                method: "POST",
+                credentials: "include",
+                xhrFields: { withCredentials: true },
+                body: JSON.stringify(data),
+                cache: "no-cache",
+                headers: new Headers({
+                    "content-type": "application/json"
+                })
+            });
+        }
+
+
+        function addMember(userToAdd) {
+            var data = {
+                user: "{{current_user.name}}",
+                type: "add_member",
+                newmember: userToAdd,
+                groupname: "{{partner}}"
+            }
+                fetch('/add_member', {
+                    method: "POST",
+                    credentials: "include",
+                    xhrFields: { withCredentials: true },
+                    body: JSON.stringify(data),
+                    cache: "no-cache",
+                    headers: new Headers({
+                        "content-type": "application/json"
+                    })
+                });
+
+                setTimeout(() => { startingmessage() }, 1000);
+            }
+
+
+    function startingmessage() {
+        let data = {
+            sender: "{{current_user.name}}",
+            recipient: "{{partner}}",
+            content: "Member added",
+            destination: "{{partner}}"
+        };
+
+
+        fetch('/sendmessage', {
+            method: "POST",
+            credentials: "include",
+            xhrFields: { withCredentials: true },
+            body: JSON.stringify(data),
+            cache: "no-cache",
+            headers: new Headers({
+                "content-type": "application/json"
+            })
+        })
+
+        setTimeout(() => { window.location.href = "/messenger"; }, 1000);
+    }
+    </script>
+
+{% endblock %}

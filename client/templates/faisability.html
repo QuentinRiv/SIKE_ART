@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<style>
+    #below {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+            grid-template-rows: repeat(3, 1fr);
+            width: 100%;
+            height: 90%;
+        }
+
+        .one {
+            grid-column: 1;
+            grid-row: 2;
+            text-align: center;
+            }
+        .two {
+            grid-column: 2;
+            grid-row: 2;
+            text-align: center;
+            }
+        .three {
+            grid-column: 3;
+            grid-row: 2;
+            text-align: center;
+            }
+
+        .four {
+            grid-column: 2;
+            grid-row: 3;
+            text-align: center;
+            }
+
+        .collapsible {
+            background-color: #777;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            /* width: 100%; */
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            border-radius: 5px;
+        }
+
+        .content {
+            padding: 0 18px;
+            /* max-height: 0; */
+            overflow: hidden;
+            /* transition: max-height 0.2s ease-out; */
+            /* background-color: #f1f1f1; */
+        }
+
+        .see{
+            color: aliceblue;
+        }
+
+        input[type=text], select {
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            }
+
+        .buttonCollapse{
+            background-color: Transparent;
+            background-repeat:no-repeat;
+            border: none;
+            outline:none;
+        }
+
+</style>
+
+            <div class="one">
+                <button class="collapsible" id="initialisation" onClick="select_test(this.id)">
+                    <i class="fas fa-user-plus myicon fa-4x"></i>
+                </button>
+            </div>
+            <div class="two">
+                <button class="collapsible" id="treeupdate" onClick="select_test(this.id)">
+                    <i id="icon1" class="fa fa-tree fa-4x myicon"></i>
+                </button>
+            </div>
+            <div class="three">
+                <button class="collapsible" id="sendmessage" onClick="select_test(this.id)">
+                    <i class="fas fa-envelope-open-text fa-4x myicon"></i>
+                </button>
+            </div>
+
+            <div class="four">
+                <div id="key">
+                    <input type="radio" id="ecdh" name="method" value="ecdh" checked>
+                    <label for="ecdh"><p class="see">ECDH</p></label>
+                    <br>
+                    <input type="radio" id="sike27" name="method" value="sike27" checked>
+                    <label for="sike27"><p class="see">sike27</p></label>
+                    <br>
+                    <input type="radio" id="SIKE751" name="method" value="SIKE751" checked>
+                    <label for="SIKE751"><p class="see">SIKE751</p></label>
+                    <br>
+                    <br>
+                    <button id="updateKey" onClick="updateSK()">Send</button>
+                </div>
+            </div>
+
+
+
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+        var phase = "";
+        var amethod = "";
+
+        function updateSK() {
+            var radios = document.getElementsByName('method');
+
+            for (var i = 0, length = radios.length; i < length; i++) {
+                if (radios[i].checked) {
+                    // do whatever you want with the checked radio
+                    alert(radios[i].value);
+                    amethod = radios[i].value;
+
+                    // only one radio can be logically checked, don't check the rest
+                    break;
+                }
+            }
+
+            console.log(phase);
+            if (phase=="treeupdate") {
+                var number = Math.floor(Math.random() * 1000);
+                console.log(number);
+                var data = {method: amethod, members: "members", mode:'create_group' };
+            }
+            else if (phase == "sendmessage") {
+                var data = {method: amethod, members: "members", mode: 'send_message' };
+            }
+            else if (phase == "initialisation") {
+                var data = { members: "members", mode: 'initialisation', method: amethod};
+            }
+            fetch('/faisability', {
+                method: "POST",
+                credentials: "include",
+                xhrFields: { withCredentials: true },
+                body: JSON.stringify(data),
+                cache: "no-cache",
+                headers: new Headers({
+                    "content-type": "application/json"
+                })
+            });
+        }
+
+        function select_test(nom) {
+            phase = nom;
+        }
+
+
+    </script>
+
+{% endblock %}
