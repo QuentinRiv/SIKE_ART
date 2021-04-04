@@ -95,10 +95,9 @@ Feel free to contribute to this project ! Any contributions you make are **great
 
 <!-- CONTACT -->
 ## Contact
+Quentin Rivollat - quentin.rivollat@etu.unige.ch
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/QuentinRiv/SIKE_ART](https://github.com/QuentinRiv/SIKE_ART)
 
 
 
@@ -107,7 +106,7 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 * [Original chat app template](https://codepen.io/emilcarlsson/details/ZOQZaV)
 * [On Ends-to-Ends Encryption: Asynchronous Group Messaging with Strong Security Guarantees](https://eprint.iacr.org/2017/666.pdf)
 * [Supersingular Isogeny Key Encapsulation](https://sike.org/files/SIDH-spec.pdf)
-
+* [Original READMED](https://github.com/othneildrew/Best-README-Template/blob/master/README.md)
 
 
 
@@ -116,11 +115,11 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/QuentinRiv/SIKE_ART.svg?style=for-the-badge
 [contributors-url]: https://github.com/QuentinRiv/SIKE_ART/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/QuentinRiv/SIKE_ART.svg?style=for-the-badge
 [forks-url]: https://github.com/QuentinRiv/SIKE_ART/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/QuentinRiv/SIKE_ART.svg?style=for-the-badge
 [stars-url]: https://github.com/QuentinRiv/SIKE_ART/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/QuentinRiv/SIKE_ART.svg?style=for-the-badge
 [issues-url]: https://github.com/QuentinRiv/SIKE_ART/issues
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/quentin-rivollat-2964361b9/
