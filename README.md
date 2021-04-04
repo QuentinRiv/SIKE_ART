@@ -70,13 +70,14 @@
 
 This messaging web-application is a proof of concept for the thesis "SECURE GROUP MESSAGING PROTOCOL, BASED ON POST-QUANTUM CRYPTOGRAPHY", written by myself.
 
-The app is based on both the [SIKE protocol](https://sike.org/) and the [ART protocols](https://eprint.iacr.org/2017/666.pdf)). The former makes the app post-quantum, meaning the encrypted messages resists to quantum algorithms, while the latter enables asynchronousity and post-compromise properties.
+The app is based on both the [SIKE protocol](https://sike.org/) and the [ART protocols](https://eprint.iacr.org/2017/666.pdf). The former makes the app post-quantum, meaning the encrypted messages resists to quantum algorithms, while the latter enables asynchronousity and post-compromise properties.
 
 
 ### Built With
 
 This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 * [Bootstrap](https://getbootstrap.com)
+* [Font Awesome](https://fontawesome.com)
 * [JQuery](https://jquery.com)
 * [Python](https://www.python.org/), and in particular [Flask](https://flask.palletsprojects.com/en/1.1.x/)
 
@@ -104,17 +105,9 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Img Shields](https://shields.io)
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Pages](https://pages.github.com)
-* [Animate.css](https://daneden.github.io/animate.css)
-* [Loaders.css](https://connoratherton.com/loaders)
-* [Slick Carousel](https://kenwheeler.github.io/slick)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [Sticky Kit](http://leafo.net/sticky-kit)
-* [JVectorMap](http://jvectormap.com)
-* [Font Awesome](https://fontawesome.com)
+* [Original chat app template](https://codepen.io/emilcarlsson/details/ZOQZaV)
+* [On Ends-to-Ends Encryption: Asynchronous Group Messaging with Strong Security Guarantees](https://eprint.iacr.org/2017/666.pdf)
+* [Supersingular Isogeny Key Encapsulation](https://sike.org/files/SIDH-spec.pdf)
 
 
 
@@ -123,15 +116,13 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
+[contributors-url]: https://github.com/QuentinRiv/SIKE_ART/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
+[forks-url]: https://github.com/QuentinRiv/SIKE_ART/network/members
 [stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
+[stars-url]: https://github.com/QuentinRiv/SIKE_ART/stargazers
 [issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
 [issues-url]: https://github.com/QuentinRiv/SIKE_ART/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/quentin-rivollat-2964361b9/
 [product-screenshot]: images/screenshot.png
