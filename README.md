@@ -31,10 +31,10 @@
     <img src="image/UniGE.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">SECURE GROUP MESSAGING PROTOCOL, BASED ON POST-QUANTUM CRYPTOGRAPHY</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    README for the SIKE+ART project
     <br />
     <a href="https://clientart.herokuapp.com/"><strong>Explore the app »</strong></a>
     <br />
