@@ -36,10 +36,9 @@
   <p align="center">
     An awesome README template to jumpstart your projects!
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://clientart.herokuapp.com/"><strong>Explore the app »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
     ·
     <a href="https://github.com/QuentinRiv/SIKE_ART/issues">Report Bug</a>
     ·
