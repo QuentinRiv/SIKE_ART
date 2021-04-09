@@ -18,7 +18,6 @@
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 
@@ -106,7 +105,7 @@ Project Link: [https://github.com/QuentinRiv/SIKE_ART](https://github.com/Quenti
 * [Original chat app template](https://codepen.io/emilcarlsson/details/ZOQZaV)
 * [On Ends-to-Ends Encryption: Asynchronous Group Messaging with Strong Security Guarantees](https://eprint.iacr.org/2017/666.pdf)
 * [Supersingular Isogeny Key Encapsulation](https://sike.org/files/SIDH-spec.pdf)
-* [Original READMED](https://github.com/othneildrew/Best-README-Template/blob/master/README.md)
+* [Original README](https://github.com/othneildrew/Best-README-Template/blob/master/README.md)
 
 
 
