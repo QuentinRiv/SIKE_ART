@@ -1,0 +1,283 @@
+{% extends "base.html" %}
+
+{% block page %}
+<title>Login page</title>
+{% endblock %}
+
+{% block title %}
+<p style="color: aliceblue; font-size: 1.7em;">New group</p>
+{% endblock %}
+
+{% block content %}
+
+    <style class="cp-pen-styles">
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #27ae60;
+            font-family: "proxima-nova", "Source Sans Pro", sans-serif;
+            font-size: 1em;
+            letter-spacing: 0.1px;
+            color: #32465a;
+            text-rendering: optimizeLegibility;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+            -webkit-font-smoothing: antialiased;
+        }
+    
+        #frame {
+            width: 95%;
+            min-width: 360px;
+            max-width: 1000px;
+            height: 92vh;
+            min-height: 300px;
+            max-height: 720px;
+            background: #E6EAEA;
+            background: #2c3e50;
+        }
+
+         #head {
+            width: 100%;
+            height: 10%;
+            line-height: 60px;
+            background: #4d290d;
+            text-align: center;
+            }
+        
+        #below {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+            grid-template-rows: repeat(3, 1fr);
+            width: 100%;
+            height: 90%;
+            /* text-align: center; */
+        }
+
+        .middlecenter {
+            grid-column: 1/4;
+            grid-row: 2;
+            text-align: center;
+            }
+        .two {
+            grid-column: 2;
+            grid-row: 2;
+            text-align: center;
+            }
+        .three {
+            grid-column: 3;
+            grid-row: 2;
+            text-align: center;
+            }
+
+        .four {
+            grid-column: 2;
+            grid-row: 3;
+            text-align: center;
+            }
+
+        .five {
+            grid-column: 1 / 4;
+            grid-row: 3;
+            text-align: center;
+            /* z-index: 2; */
+            }
+        
+        .six {
+            grid-column: 1 / 4;
+            grid-row: 3;
+            text-align: center;
+            /* z-index: 1; */
+            }
+
+
+        .myicon {
+            color: black;
+            }
+
+        .collapsible {
+            background-color: #777;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            border-radius: 5px;
+        }
+
+        .active, .collapsible:hover {
+            background-color: #555;
+        }
+
+        .content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+
+        input[type=text], select {
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            }
+
+        #send {
+            background-color: #889702;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            }
+
+        .deleteImg{
+            width: 150;
+            height: 150;
+            padding: 3px 3px;
+        }
+
+        .joliImg{
+            border-radius:10%;
+            width: 150;
+            height: 150;
+            padding: 3px 3px;
+            /* box-shadow: 0px 0px 40px 10px #0ff; */
+            transition: 0.2s box-shadow ease;
+        }
+
+        .joliImg:hover {
+            cursor: pointer;
+        }
+
+        .buttonToDel{
+            background-color: Transparent;
+            background-repeat:no-repeat;
+            border: none;
+            outline:none;
+        }
+
+        .buttonToNewconv{
+            background-color: Transparent;
+            background-repeat:no-repeat;
+            border: none;
+            outline:none;
+        }
+
+        </style>
+
+
+        <div class="middlecenter">
+            {%for name in names%}
+            <button onClick="newConv('{{name}}')" class=buttonToNewconv>
+                <img id={{name}} class="joliImg" src="{{url_for('tree_bp.static', filename='imag/')}}{{names_id[name]}}.png" alt="">
+            </button>
+            {%endfor%}
+        </div>
+
+        <div class="four">
+            <input type="text" class="text" id="groupNameField" placeholder="Group name" size="0">
+            <br>
+            <button id="send" onclick="groupCreation(groupNameField.value)">Create</button>
+        </div>
+
+
+    <script>
+        var names = JSON.parse('{{ names | tojson | safe}}');
+        var members = [];
+        function newConv(nom) {
+            var content = document.getElementsByClassName("joliImg");
+            for (let j = 0; j < content.length; j++) {
+                if (content[j].id == nom) {
+                    if (members.includes(content[j].id)) {
+                        content[j].style.boxShadow = "";
+                        const index = members.indexOf(nom);
+                        if (index > -1) {
+                            members.splice(index, 1);
+                        }
+                    }
+                    else {
+                        content[j].style.boxShadow = "0px 0px 40px 5px #0ff";
+                        members.push(content[j].id);
+                    }
+                }
+            }
+
+            if (members.length != 0) {
+                document.getElementById("send").disabled = false;
+            }
+            else {
+                document.getElementById("send").disabled = true;
+            }
+            console.log(members);
+
+        }
+
+    function groupCreation(groupname) {
+            console.log(members);
+            var data = { name: groupname, members: members };
+            console.log(data);
+
+            fetch('/create_group', {
+                method: "POST",
+                credentials: "include",
+                xhrFields: { withCredentials: true },
+                body: JSON.stringify(data),
+                cache: "no-cache",
+                headers: new Headers({
+                    "content-type": "application/json"
+                })
+            })
+                .then(function (response) {
+                    console.log('Response:', response)
+                    if (response.status !== 200) {
+                        console.log(`Looks like there was a problem. Status code: ${response.status}`);
+                        return;
+                    }
+                    response.json().then(function (data) {
+                        console.log("Success for the POST");
+                    });
+
+                    setTimeout(() => { startingmessage()}, 1000);
+                })
+                .catch(function (error) {
+                    console.log("Fetch error: " + error);
+                });
+
+    function startingmessage() {
+
+
+        let data = {
+            sender: "{{current_user.name}}",
+            recipient: groupname,
+            content: "Group created",
+            destination: groupname
+        };
+
+
+        fetch('/sendmessage', {
+            method: "POST",
+            credentials: "include",
+            xhrFields: { withCredentials: true },
+            body: JSON.stringify(data),
+            cache: "no-cache",
+            headers: new Headers({
+                "content-type": "application/json"
+            })
+        })
+
+        setTimeout(() => { window.location.href = "/messenger"; }, 1000);
+    }
+
+            }
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<style>
+    img{
+        border-radius: 50%;
+    }
+
+    .info, .textdiv{
+        text-align: center;
+    }
+
+    .text{
+        font-size: 25px;
+        color: bisque;
+        font-weight: bold;
+    }
+
+    #send {
+            background-color: #889702;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            }
+
+    input[type=text], select {
+        padding: 12px 20px;
+        margin: 18px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        }
+
+</style>
+<div class=info>
+    <img src="/static//imag/{{name}}.png" alt="">
+</div>
+<br>
+<br>
+<div class="textdiv">
+    <span class="text">Name : {{name}}</span>
+    <br>
+    <span class="text">Public id : {{public_key}}</span>
+</div>
+
+<br>
+<br>
+<div class="textdiv">
+    <div class="four">
+        <input type="text" class="text" id="messageField" placeholder="Send message" size="20">
+        <br>
+        <button id="send" ondragenter="" onclick="handleClick(messageField.value)">Send</button>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+
+
+{% block page %}
+<title>New conversation page</title>
+{% endblock %}
+
+
+{% block title %}
+<p style="color: aliceblue; font-size: 1.7em;">New conversation</p>
+{% endblock %}
+
+{% block content %}
+
+
+    <style class="cp-pen-styles">
+        #below {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+            grid-template-rows: repeat(3, 1fr);
+            width: 100%;
+            height: 90%;
+        }
+
+        .middlecenter {
+            grid-column: 1/4;
+            grid-row: 2;
+            text-align: center;
+            }
+
+
+        .four {
+            grid-column: 2;
+            grid-row: 3;
+            text-align: center;
+            }
+
+
+
+        .myicon {
+            color: black;
+            }
+
+
+
+        input[type=text], select {
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            }
+
+        #send {
+            background-color: #889702;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            }
+
+        .deleteImg{
+            width: 150;
+            height: 150;
+            padding: 3px 3px;
+        }
+
+        .joliImg{
+            border-radius:10%;
+            width: 150;
+            height: 150;
+            padding: 3px 3px;
+            transition: 0.2s box-shadow ease;
+        }
+
+        .joliImg:hover {
+            cursor: pointer;
+        }
+
+        .buttonToDel{
+            background-color: Transparent;
+            background-repeat:no-repeat;
+            border: none;
+            outline:none;
+        }
+
+        .buttonToNewconv{
+            background-color: Transparent;
+            background-repeat:no-repeat;
+            border: none;
+            outline:none;
+        }
+
+        #recipient{
+            font-size: 20px;
+            font-weight: bolder;
+            color:antiquewhite;
+        }
+
+        </style>
+
+
+</head>
+
+
+            <div class="middlecenter">
+                {%for id in partners_id%}
+                <button onClick="newConv('{{id}}')" class=buttonToNewconv>
+                    <img id={{id}} class="joliImg" src="{{ url_for('tree_bp.static', filename='imag/') }}user_{{id}}.png" alt="">
+                </button>
+                {%endfor%}
+            </div>
+
+            <div class="four">
+                <span id="recipient"></span>
+                <br>
+                <input type="text" onkeyup="enable()" class="text" id="messageField" placeholder="First message" size="30">
+                <br>
+                <button id="send" ondragenter="" onclick="handleClick(messageField.value)">Send</button>
+            </div>
+
+
+
+    <script>
+
+        function enable() {
+            var input = document.getElementById('messageField');
+            console.log(input.value);
+
+            if (input.value.length != 0) {
+                console.log("Il y a du texte");
+                document.getElementById("send").disabled = false;
+            }
+            else {
+                console.log("Il y a que tchi !");
+                document.getElementById("send").disabled = true;
+            }
+        }
+
+        var input = document.getElementById("messageField");
+
+            // Execute a function when the user releases a key on the keyboard
+            input.addEventListener("keyup", function (event) {
+                // Number 13 is the "Enter" key on the keyboard
+                if (event.keyCode === 13) {
+                    // Cancel the default action, if needed
+                    event.preventDefault();
+                    // Trigger the button element with a click
+                    document.getElementById("send").click();
+                }
+            });
+
+        var members = JSON.parse('{{ others | tojson | safe}}');
+        var recipient = "";
+        function newConv(nom) {
+            recipient = nom;
+            var content = document.getElementsByClassName("joliImg");
+            $("#recipient").html(members[nom]);
+            for (let j = 0; j < content.length; j++) {
+                if (content[j].id == nom) {
+                    content[j].style.boxShadow = "0px 0px 40px 5px #0ff";
+                }
+                else {
+                    content[j].style.boxShadow = "";
+                }
+            }
+        }
+
+        function handleClick(texte) {
+
+            let data = {
+                sender: "{{current_user.name}}",
+                recipient: members[recipient],
+                content: texte,
+                destination: members[recipient]
+            };
+
+
+            fetch('/sendmessage', {
+                method: "POST",
+                credentials: "include",
+                xhrFields: { withCredentials: true },
+                body: JSON.stringify(data),
+                cache: "no-cache",
+                headers: new Headers({
+                    "content-type": "application/json"
+                })
+            }).then();
+
+            setTimeout(() => { window.location.href = "/messenger"; }, 1000);
+        }
+
+    </script>
+
+{% endblock %}
